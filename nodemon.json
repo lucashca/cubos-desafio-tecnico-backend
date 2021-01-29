@@ -1,0 +1,10 @@
+{
+    "watch": [
+        "src"
+    ],
+    "ext": "ts",
+    "execMap": {
+        "ts": "ts-node src/app.ts",
+        "prod": "node --max-old-space-size=4000 -r ts-node/register/transpile-only  src/app.ts"
+    }
+}

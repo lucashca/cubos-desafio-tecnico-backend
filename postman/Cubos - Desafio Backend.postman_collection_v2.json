@@ -1,0 +1,124 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Cubos - Desafio Backend",
+		"_postman_id": "62433b23-e044-741a-955b-b75bafa13e34",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Salvar Multiplas Regras",
+			"request": {
+				"url": "http://localhost:3500/saveRules",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n\t\"type\":\"DAILY\",\n\t\"intervals\": \n\t\t[\n\t\t\t{\"start\":\"13:30\",\"end\":\"14:25\"},\n\t\t\t{\"start\":\"12:45\",\"end\":\"13:25\"}\n\t\t\n\t\t\t\t\t\t\n\t\t]\n},\n{\n\t\"type\":\"SPECIFIC_DATE\",\n\t\"day\":\"31-02-2021\",\n\t\"intervals\": \n\t\t[\n\t\t\t\n\t\t\t{\"start\":\"05:50\",\"end\":\"06:25\"},\n\t\t\t{\"start\":\"15:58\",\"end\":\"16:25\"}\n\t\t\t\t\t\t\n\t\t]\n},\n{\n\t\"type\":\"WEEKLY\",\n\t\"daysInWeek\":[1,2,3],\n\t\"intervals\": \n\t\t[\n\t\t\t{\"start\":\"18:30\",\"end\":\"19:25\"},\n\t\t\t{\"start\":\"20:58\",\"end\":\"21:25\"}\n\t\t\t\t\t\t\n\t\t]\n}\n]"
+				},
+				"description": "Exemplo da utilização do endpoit /saveRules.\n\nEste endpoint recebe um array de regras, sendo que as regras podem ser de tipos diversos.\n\nLegenda dos atributos:\n\ntype - Representa como será formuláda a regra, podendo ser, diariamente, semanalmente ou em uma data especifica, este atributo pode possuir os seguintes valores:\n\n\t\tDAILY - Representa a regra de horários para todos os dias da semana.\n\n\t\tSPECIFIC_DATE - Representa a regra de horários para uma data específica.\n\n\t\tWEEKLY - Representa a regra de horários para dias específicos na semana. \n\t\t\n\t\t\nday - Representa uma data específica, é utilizado quando o atributo \"type\" for SPECIFIC_DATE, o valor de entrada deve estar no seguinte padrão: \"dd-mm-aa\". \n\ndaysInWeek - Representa os dias da semana em que a regra será válida. Este atributo deve ser utilizado quando \"type\" for \"WEEKLY\", o valor de entrada deve ser informado com um array númerico representado os dias da semana, exemplo: [0,2,5], sendo que o 0 representa o domingo e assim consecutivamente, logo o array representa 'domingo','terça','sexta'.\n\nintervals - Atributo que representa um array de um objeto informando os intervalos de horários este objeto possui os seguintes atributos:\t\t\t\n\t\tstart - Recebe uma string que representa um horário do no formato (24hs) \"hh:mm\", este valor deve ser inferior ao atributo end.  \n\t\t\n\t\tend -  Recebe uma string que representa um horário do no formato (24hs) \"hh:mm\", este valor deve ser superior ao atributo start.  "
+			},
+			"response": []
+		},
+		{
+			"name": "Salvar Regra Diaria",
+			"request": {
+				"url": "http://localhost:3500/saveRules",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"type\":\"DAILY\",\n\t\"intervals\": \n\t\t[\n\t\t\t{\"start\":\"8:30\",\"end\":\"9:25\"}\n\t\t\t\t\t\t\n\t\t]\n}"
+				},
+				"description": "Exemplo da utilização do endpoit /saveRules com uma única regra do tipo DAILY.\n\n\nLegenda dos atributos:\n\ntype - Representa como será formuláda a regra, podendo ser, diariamente, semanalmente ou em uma data especifica, este atributo pode possuir os seguintes valores:\n\n\t\tDAILY - Representa a regra de horários para todos os dias da semana.\n\nintervals - Atributo que representa um array de um objeto informando os intervalos de horários este objeto possui os seguintes atributos:\t\t\t\n\t\tstart - Recebe uma string que representa um horário do no formato (24hs) \"hh:mm\", este valor deve ser inferior ao atributo end.  \n\t\t\n\t\tend -  Recebe uma string que representa um horário do no formato (24hs) \"hh:mm\", este valor deve ser superior ao atributo start.  "
+			},
+			"response": []
+		},
+		{
+			"name": "Salvar Regra Semanal",
+			"request": {
+				"url": "http://localhost:3500/saveRules",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"type\":\"WEEKLY\",\n\t\"daysInWeek\":[1,5],\n\t\"intervals\": \n\t\t[\n\t\t\t{\"start\":\"19:59\",\"end\":\"20:20\"}\n\t\n\t\t]\n}"
+				},
+				"description": "Exemplo da utilização do endpoit /saveRules com uma única regra do tipo WEEKLY.\n\nLegenda dos atributos:\n\ntype - Representa como será formuláda a regra, podendo ser, diariamente, semanalmente ou em uma data especifica, este atributo pode possuir os seguintes valores:\n\n\n\t\tWEEKLY - Representa a regra de horários para dias específicos na semana. \n\t\t\n\t\t\ndaysInWeek - Representa os dias da semana em que a regra será válida. Este atributo deve ser utilizado quando \"type\" for \"WEEKLY\", o valor de entrada deve ser informado com um array númerico representado os dias da semana, exemplo: [0,2,5], sendo que o 0 representa o domingo e assim consecutivamente, logo o array representa 'domingo','terça','sexta'.\n\nintervals - Atributo que representa um array de um objeto informando os intervalos de horários este objeto possui os seguintes atributos:\t\t\t\n\t\tstart - Recebe uma string que representa um horário do no formato (24hs) \"hh:mm\", este valor deve ser inferior ao atributo end.  \n\t\t\n\t\tend -  Recebe uma string que representa um horário do no formato (24hs) \"hh:mm\", este valor deve ser superior ao atributo start.  "
+			},
+			"response": []
+		},
+		{
+			"name": "Salvar Regra para dia especifico",
+			"request": {
+				"url": "http://localhost:3500/saveRules",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"type\":\"SPECIFIC_DATE\",\n\t\"day\":\"27-10-2021\",\n\t\"intervals\": \n\t\t[\n\t\t  {\n                \"start\": \"18:58\",\n                \"end\": \"19:25\"\n            }\n\t\t]\n}"
+				},
+				"description": "Exemplo da utilização do endpoit /saveRules com uma única regra do tipo SPECIFIC_DATE.\n\n\nLegenda dos atributos:\n\ntype - Representa como será formuláda a regra, podendo ser, diariamente, semanalmente ou em uma data especifica, este atributo pode possuir os seguintes valores:\n\n\t\tSPECIFIC_DATE - Representa a regra de horários para uma data específica.\n\n\t\t\nday - Representa uma data específica, é utilizado quando o atributo \"type\" for SPECIFIC_DATE, o valor de entrada deve estar no seguinte padrão: \"dd-mm-aa\". \n\nintervals - Atributo que representa um array de um objeto informando os intervalos de horários este objeto possui os seguintes atributos:\t\t\t\n\t\tstart - Recebe uma string que representa um horário do no formato (24hs) \"hh:mm\", este valor deve ser inferior ao atributo end.  \n\t\t\n\t\tend -  Recebe uma string que representa um horário do no formato (24hs) \"hh:mm\", este valor deve ser superior ao atributo start.  "
+			},
+			"response": []
+		},
+		{
+			"name": "List Rules",
+			"request": {
+				"url": "http://localhost:3500/listScheduleRule",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "This endpoit list all rules."
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar regra pelo ID",
+			"request": {
+				"url": "http://localhost:3500/deleteScheduleRuleById/***SUA_ID_AQUI***",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": "A endpoit /deleteScheduleRuleById deve ser utilizada para deletar uma regra pela id.\n\nEla deve ser executada da seguinte forma.\n\n\t/deleteScheduleRuleById/:id\n\tEx: /deleteScheduleRuleById/1611764897236-681 "
+			},
+			"response": []
+		},
+		{
+			"name": "Listar regras em uma faixa de data",
+			"request": {
+				"url": "http://localhost:3500/listScheduleRuleInRange/25-10-2021/28-10-2021",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "\nA endpoit /listScheduleRuleInRange deve ser utilizada para para retornar os horários com base em uma faixa de data específica.\n\nEla deve ser executada da seguinte forma.\n\n\t/listScheduleRuleInRange/:startDate/:endDate\n\tEx: /listScheduleRuleInRange/25-10-2021/28-10-2021\n\n"
+			},
+			"response": []
+		}
+	]
+}
